@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+  <div class="carousel-inner">
+      {% for loop_cycle in self.carousel_images.all %}
+          {% image loop_cycle.carousel fill-900x400  as img %}
+        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+          <img src="{{ img.url }}" class="d-block w-100" alt="{{img.alt}}">
+        </div>
+      {% endfor %}
+  </div>
+ {% for loop_cycle in self.carousel_images.all %}
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+{% endfor %}
+</div>
+    {% image self.banner_image width-2000 as img %}
+    <div class="jumbotron" style="background: url('{{ img.url }}')">
+      <h1 class="display-4">{{ self.banner_title}}</h1>
+      <p class="lead">{{ self.banner_suntitle | richtext }}</p>
+     {% if self.banner_cta %}
+      <a class="btn btn-primary btn-lg" href="{{ self.banner_cta }}" role="button">Learn more</a>
+    {% endif %}
+    </div>
+    site settings:
+    {%  if settings.site_settings.SocialMediaSettings.facebook %}
+        <a href="{{ settings.site_settings.SocialMediaSettings.facebook  }}">
+            <i class="fab fa-facebook"></i>
+        </a>
+    {% endif %}
+    {%  if settings.site_settings.SocialMediaSettings.twitter %}
+        <a href="{{ settings.site_settings.SocialMediaSettings.twitter  }}">
+            <i class="fab fa-twitter"></i>
+        </a>
+    {% endif %}
+    {%  if settings.site_settings.SocialMediaSettings.youtube %}
+        <a href="{{ settings.site_settings.SocialMediaSettings.youtube  }}">
+            <i class="fab fa-youtube"></i>
+        </a>
+    {% endif %}
+{% endblock %}

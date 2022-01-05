@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags%}
+ {% block content %}
+     {# use the methode names of the name of the route #}
+     <a href="{%  routablepageurl page "latest_blog_posts"%}">View Latest Posts Only </a>
+     {% for post in posts %}
+         {{ post.title }}
+     {% endfor %}
+{% endblock %}
