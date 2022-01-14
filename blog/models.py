@@ -9,8 +9,6 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from django.shortcuts import render
 from wagtail.snippets.models import register_snippet
-
-
 class BlogAuthor(models.Model):
     """Blog author for snippets,"""
     name = models.CharField(max_length=100)
